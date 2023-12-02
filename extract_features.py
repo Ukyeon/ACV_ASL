@@ -13,7 +13,8 @@ def video_to_frames(video):
     if os.path.exists(path):
         shutil.rmtree(path)
     os.makedirs(path)
-    video_path = os.path.join(config.test_path, 'video', video)
+    # When you train, path should be changed to the train path.
+    video_path = os.path.join(config.test_path, 'video', video)#config.test_path, 'video', video)
     count = 0
     image_list = []
     # Path to video file

@@ -86,16 +86,19 @@ class VideoDescriptionTrain(object):
         decoder_target_data = []
         videoId = []
         videoSeq = []
+
         for idx, cap in enumerate(training_list):
             caption = cap[0]
             videoId.append(cap[1])
             videoSeq.append(caption)
+
         train_sequences = self.tokenizer.texts_to_sequences(videoSeq)
         train_sequences = np.array(train_sequences)
-        train_sequences = pad_sequences(train_sequences, padding='post', truncating='post',
-                                        maxlen=self.max_length)
+        train_sequences = pad_sequences(train_sequences, padding='post', truncating='post', maxlen=self.max_length)
+
         file_size = len(train_sequences)
         n = 0
+
         for i in range(self.epochs):
             for idx in range(0, file_size):
                 n += 1
@@ -103,9 +106,7 @@ class VideoDescriptionTrain(object):
                 y = to_categorical(train_sequences[idx], self.num_decoder_tokens)
                 decoder_input_data.append(y[:-1])
                 decoder_target_data.append(y[1:])
-                # print(i)
-                # if i == 149:
-                #     print("debug")
+
                 if n == self.batch_size:
                     encoder_input = np.array(encoder_input_data)
                     decoder_input = np.array(decoder_input_data)
