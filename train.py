@@ -102,6 +102,7 @@ class VideoDescriptionTrain(object):
         for i in range(self.epochs):
             for idx in range(0, file_size):
                 n += 1
+
                 encoder_input_data.append(self.x_data[videoId[idx]])
                 y = to_categorical(train_sequences[idx], self.num_decoder_tokens)
                 decoder_input_data.append(y[:-1])

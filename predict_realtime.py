@@ -222,10 +222,13 @@ if __name__ == "__main__":
         #     print('\n.........................\n')
         #     print(sentence)
         # print('\n.........................\n')
-        print("Caption generated:", sentence[0])
-        print('It took {:.2f} seconds to generate caption'.format(end-start))
+        if sentence:  # If sentence is not empty
+            print("Caption generated:", sentence[0])
+            print('It took {:.2f} seconds to generate caption'.format(end - start))
+            video_to_text.main(file, sentence[0])
+        else:
+            print("The sentence is empty.")
 
-        video_to_text.main(file, sentence[0])
         play_video = input('Should I play the video? ')
         if play_video.lower() == 'y':
             continue
